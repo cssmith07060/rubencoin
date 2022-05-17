@@ -3,16 +3,17 @@ const Sha256 = require('crypto-js/sha256');
 class Transaction{
     constructor(fromAddress, toAddress, amount) {
         this.fromAddress = fromAddress;
-        this.toaddress = this.toaddress;
-        this.amount = amount;
-    }
-}
+        this.toAddress = this.toAddress;
+        this.amout = amount;
+    
+    
 
 
-class Block{
-    constructor(index, timestamp, data, previoushash = '') {
+class Block {
+    constructor( timestamp,transactions, data, previoushash = '') {
         this.timestamp = timestamp;
         this.data = data;
+        this.transactions = transactions
         this.previousHash = this.previousHash;
         this.hash = this.calculateHash();
         this.nonce = 0;
@@ -42,11 +43,12 @@ class Blockchain{
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
     }
-    addBlock(newBlock) {
-        newBlock.previous = this.getlastestBlock().hash;
-        newBlock.mineBlock(this.difficulty);
-        this.chain.push(newBlock);
+    
+    minePendingTransactions(miningRewardAddress) {
+        letBlock = new Block(date.now(), this.pendingTransactions);
+        Block.mineBlock(this.difficulty);
     }
+    
     isChainValid() {
         for (let i = 1; 1 < this.chain.length; 1++){
             const currentBlock = this.chain[i];
